@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <h2>Product List</h2>
+  
+    <a routerLink="/products/add" class="btn btn-primary mb-3">Add Product</a>
+  
+    <table class="table table-striped" *ngIf="products.length > 0; else noProducts">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>
+            <a [routerLink]="['/products/edit', product.id]" class="btn btn-sm btn-warning me-2">Edit</a>
+            <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <ng-template #noProducts>
+      <p class="text-muted">No products available. Add a new product.</p>
+    </ng-template>
+  </div>
+  
